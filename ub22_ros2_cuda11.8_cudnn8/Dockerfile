@@ -100,7 +100,8 @@ RUN add-apt-repository universe \
 #   && rm -rf /var/lib/apt/lists
 
 # RUN ./config/pip/pip_setup.sh
-RUN pip3 install opencv-python
+RUN pip3 install opencv-python numpy==1.26.4 ultralytics
+
 
 ############################## USER CONFIG ####################################
 # * Switch user to ${USER}

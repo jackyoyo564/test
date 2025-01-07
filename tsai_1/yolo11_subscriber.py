@@ -4,6 +4,10 @@ from rclpy.node import Node
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
+from ultralytics import YOLO
+
+# Load YOLOv11 model
+model = YOLO("yolo11n.pt")
 
 class VideoSubscriber(Node):
     def __init__(self):
@@ -18,7 +22,13 @@ class VideoSubscriber(Node):
 
     def listener_callback(self, msg):
         frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
-        cv2.imshow('YOLO Video Feed', frame)
+
+        # YOLO inference
+        results = model.predict(source=frame, save=False, save_txt=False)
+        annotated_frame = results[0].plot()  # Render detections on the frame
+
+        # Display the annotated frame
+        cv2.imshow('YOLO Video Feed', annotated_frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             rclpy.shutdown()
 

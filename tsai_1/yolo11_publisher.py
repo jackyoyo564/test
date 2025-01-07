@@ -4,27 +4,18 @@ from rclpy.node import Node
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
-from ultralytics import YOLO
-
-# Load YOLOv11 model
-model = YOLO("yolo11n.pt")
 
 class VideoPublisher(Node):
     def __init__(self):
         super().__init__('video_publisher')
         self.publisher_ = self.create_publisher(Image, 'video_frames', 10)
         self.timer = self.create_timer(0.033, self.timer_callback)  # 30 FPS
-        self.cap = cv2.VideoCapture("\\home\tsai\work\src\tsai_package\tsai_package\valorant.mp4")  # Open webcam
+        self.cap = cv2.VideoCapture("0")  # Open video file
         self.bridge = CvBridge()
-        self.model = model  # Use the preloaded model
 
     def timer_callback(self):
         ret, frame = self.cap.read()
         if ret:
-            # YOLO inference
-            results = self.model.predict(source=frame, save=False, save_txt=False)
-            frame = results[0].plot()  # Render detections on the frame
-
             # Convert frame to ROS Image message
             msg = self.bridge.cv2_to_imgmsg(frame, encoding='bgr8')
             self.publisher_.publish(msg)
