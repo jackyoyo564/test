@@ -23,6 +23,8 @@ setup(
             'yolo11_publisher=tsai_package.yolo11_publisher:main',
             'yolo11_subscriber=tsai_package.yolo11_subscriber:main',
             'yolo11_sub_pub=tsai_package.yolo11_sub_pub:main',
+            'msg_pub_test=tsai_package.msg_pub_test:main',
+            'msg_sub_test=tsai_package.msg_sub_test:main',
         ],
     },
 )
