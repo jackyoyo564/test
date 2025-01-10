@@ -1,32 +1,33 @@
-# Random Number Subscriber
 import rclpy
 from rclpy.node import Node
-from example_interfaces.msg import Int64  # Replace with your custom msg if needed
-import random
 
-class RandomNumberSubscriber(Node):
+from tutorial_interfaces.msg import Num        # CHANGE
+
+
+class MinimalSubscriber(Node):
+
     def __init__(self):
-        super().__init__('random_number_subscriber')
+        super().__init__('minimal_subscriber')
         self.subscription = self.create_subscription(
-            Int64,
-            'random_number',
+            Num,                                              # CHANGE
+            'topic',
             self.listener_callback,
-            10
-        )
+            10)
+        self.subscription
 
     def listener_callback(self, msg):
-        self.get_logger().info(f'Received: {msg.data}')
+            self.get_logger().info('I heard: "%d"' % msg.num) # CHANGE
 
 
 def main(args=None):
     rclpy.init(args=args)
 
-    try:
-        random_number_subscriber = RandomNumberSubscriber()
-        rclpy.spin(random_number_subscriber)
-    finally:
-        random_number_subscriber.destroy_node()
-        rclpy.shutdown()
+    minimal_subscriber = MinimalSubscriber()
+
+    rclpy.spin(minimal_subscriber)
+
+    minimal_subscriber.destroy_node()
+    rclpy.shutdown()
 
 
 if __name__ == '__main__':
