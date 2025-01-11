@@ -1,0 +1,7 @@
+# Request
+string action  # 操作名稱，例如 "heating" 或 "cooling"
+
+---
+# Response
+bool success   # 操作是否成功
+string message # 結果或錯誤訊息
