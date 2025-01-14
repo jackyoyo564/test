@@ -16,6 +16,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Sphere.msg"
   "srv/AddThreeInts.srv"
   "srv/Bank.srv"
+  "srv/TemperatureControl.srv"
   DEPENDENCIES geometry_msgs  # 指定 Sphere.msg 依賴 geometry_msgs
 )
 
