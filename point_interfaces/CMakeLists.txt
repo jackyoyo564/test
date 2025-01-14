@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(tutorial_interfaces)
+project(point_interfaces)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,16 +7,15 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(geometry_msgs REQUIRED)  # 新增：找到 geometry_msgs 依賴
-find_package(rosidl_default_generators REQUIRED)  # 新增：找到 rosidl_default_generators 依賴
+find_package(geometry_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+# uncomment the following section in order to fill in
+# further dependencies manually.
+# find_package(<dependency> REQUIRED)
 
-# Generate message and service code
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/Num.msg"
-  "msg/Sphere.msg"
-  "srv/AddThreeInts.srv"
-  "srv/Bank.srv"
-  DEPENDENCIES geometry_msgs  # 指定 Sphere.msg 依賴 geometry_msgs
+  "srv/CalculateDistance.srv"
+  DEPENDENCIES geometry_msgs # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
 )
 
 if(BUILD_TESTING)
@@ -31,5 +30,6 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-# ament package
 ament_package()
+
+

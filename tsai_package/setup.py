@@ -25,6 +25,12 @@ setup(
             'yolo11_sub_pub=tsai_package.yolo11_sub_pub:main',
             'msg_pub_test=tsai_package.msg_pub_test:main',
             'msg_sub_test=tsai_package.msg_sub_test:main',
+            'turtle_practice=tsai_package.turtle_practice:main',
+            'bank_server=tsai_package.bank_server:main',
+            'bank_client=tsai_package.bank_client:main',
+            'CLASS=tsai_package.CLASS:main',
+            'turtle_clipub=tsai_package.turtle_clipub:main',
+            'turtle_sersub=tsai_package.turtle_sersub:main',
         ],
     },
 )
